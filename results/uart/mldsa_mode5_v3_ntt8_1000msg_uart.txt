@@ -1,0 +1,9 @@
+Keccak v3 + forward NTT
+ML-DSA mode 5, backend 3, 1000 messages: PASS (code 0)
+SHAKE128 5 blocks (ns/call, 1000 calls): SW 85954, selected 20448
+SW mean sign 18206 us, verify 7521 us
+NTT forward (ns/call, 128 calls): SW 46273, FPGA 28041
+Keccak only mean sign 12371 us, verify 3526 us
+NTT phases (ns/call): copy+flush 4676, start-to-done 20167, invalidate+copy 3243
+selected mean sign 11364 us, verify 3223 us
+END

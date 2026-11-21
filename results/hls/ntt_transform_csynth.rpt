@@ -1,0 +1,498 @@
+
+
+================================================================
+== Synthesis Summary Report of 'ntt_transform'
+================================================================
++ General Information: 
+    * Date:           Sat Nov 21 16:22:55 2026
+    * Version:        2026.1 (Build 6493734 on Jun 16 2026)
+    * Project:        eight_lane_bidir_hls
+    * Solution:       solution (Vivado IP Flow Target)
+    * Product family: zynq
+    * Target device:  xc7z020-clg484-1
+    
+
+* Performance & Resource Estimates: 
++--------------------------------------+------+---------------+----------+---------+------+----------+---------+-----------+-------+----------+----------+-----------+-------------+-----+
+|                Modules               | Issue|               | Iteration|         | Trip |          |       Latency       |       |          |          |           |             |     |
+|                & Loops               | Type | Violation Type|  Latency | Interval| Count| Pipelined| (cycles)|    (ns)   | Slack |   BRAM   |    DSP   |     FF    |     LUT     | URAM|
++--------------------------------------+------+---------------+----------+---------+------+----------+---------+-----------+-------+----------+----------+-----------+-------------+-----+
+|+ ntt_transform                       |     -|              -|         -|      628|     -|        no|      627|  1.254e+04|   0.00|  44 (15%)|  66 (30%)|  8678 (8%)|  10192 (19%)|    -|
+| + ntt_transform_Pipeline_load        |     -|              -|         -|      131|     -|       yes|      131|  2.620e+03|   0.00|         -|         -|   92 (~0%)|     78 (~0%)|    -|
+|  o load                              |     -|              -|         3|        1|   128|       yes|      129|  2.580e+03|  14.60|         -|         -|          -|            -|    -|
+| + ntt_transform_Pipeline_store       |     -|              -|         -|      133|     -|       yes|      133|  2.660e+03|   0.00|         -|   10 (4%)|  449 (~0%)|     780 (1%)|    -|
+|  o store                             |     -|              -|         5|        1|   128|       yes|      131|  2.620e+03|  14.60|         -|         -|          -|            -|    -|
+| o stage_pairs                        |     -|              -|        86|        -|     4|        no|      344|  6.880e+03|  14.60|         -|         -|          -|            -|    -|
+|  + transform_stage                   |     -|              -|         -|       41|     -|        no|       41|    820.000|   0.45|    8 (2%)|  56 (25%)|  7035 (6%)|   6612 (12%)|    -|
+|   + transform_stage_Pipeline_groups  |     -|              -|         -|       39|     -|       yes|       39|    780.000|   2.80|    8 (2%)|  56 (25%)|  6939 (6%)|   6499 (12%)|    -|
+|    o groups                          |     -|              -|         8|        2|    16|       yes|       37|    740.000|  14.60|         -|         -|          -|            -|    -|
+|     + butterfly_0u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  643 (~0%)|    500 (~0%)|    -|
+|     + butterfly_1u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  676 (~0%)|     571 (1%)|    -|
+|     + butterfly_2u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  837 (~0%)|     565 (1%)|    -|
+|     + butterfly_3u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  869 (~0%)|     592 (1%)|    -|
+|     + butterfly_4u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  870 (~0%)|     565 (1%)|    -|
+|     + butterfly_5u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  870 (~0%)|     612 (1%)|    -|
+|     + butterfly_6u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  870 (~0%)|     594 (1%)|    -|
+|     + butterfly_7u_s                 |     -|              -|         -|        2|     -|       yes|        5|    100.000|   2.80|   1 (~0%)|    7 (3%)|  870 (~0%)|     618 (1%)|    -|
++--------------------------------------+------+---------------+----------+---------+------+----------+---------+-----------+-------+----------+----------+-----------+-------------+-----+
+    Name Prefix: '+' for module, 'o' for loop, '*' for dataflow
+
+
+================================================================
+== HW Interfaces
+================================================================
+* M_AXI
++------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| Interface  | Read/Write | Data Width | Address Width | Latency | Offset | Register | Max Widen | Max Read     | Max Write    | Num Read    | Num Write   | Resource Estimate |
+|            |            | (SW->HW)   |               |         |        |          | Bitwidth  | Burst Length | Burst Length | Outstanding | Outstanding |                   |
++------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| m_axi_gmem | READ_WRITE | 64 -> 64   | 64            | 0       | slave  | 0        | 0         | 16           | 16           | 16          | 16          | BRAM=4            |
++------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+
+* S_AXILITE Interfaces
++---------------+------------+---------------+--------+----------+
+| Interface     | Data Width | Address Width | Offset | Register |
++---------------+------------+---------------+--------+----------+
+| s_axi_control | 32         | 6             | 16     | 0        |
++---------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++---------------+----------------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| Interface     | Register       | Offset | Width | Access | Description                      | Bit Fields                                                           |
++---------------+----------------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| s_axi_control | CTRL           | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_control | GIER           | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                             |
+| s_axi_control | IP_IER         | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_control | IP_ISR         | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_control | coefficients_1 | 0x10   | 32    | W      | Data signal of coefficients      |                                                                      |
+| s_axi_control | coefficients_2 | 0x14   | 32    | W      | Data signal of coefficients      |                                                                      |
+| s_axi_control | inverse        | 0x1c   | 32    | W      | Data signal of inverse           |                                                                      |
++---------------+----------------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++--------------+-----------+----------------+
+| Argument     | Direction | Datatype       |
++--------------+-----------+----------------+
+| coefficients | inout     | unsigned long* |
+| inverse      | in        | bool           |
++--------------+-----------+----------------+
+
+* SW-to-HW Mapping
++--------------+---------------+-----------+----------+------------------------------------------+
+| Argument     | HW Interface  | HW Type   | HW Usage | HW Info                                  |
++--------------+---------------+-----------+----------+------------------------------------------+
+| coefficients | m_axi_gmem    | interface |          | channel=0                                |
+| coefficients | s_axi_control | register  | offset   | name=coefficients_1 offset=0x10 range=32 |
+| coefficients | s_axi_control | register  | offset   | name=coefficients_2 offset=0x14 range=32 |
+| inverse      | s_axi_control | register  |          | name=inverse offset=0x1c range=32        |
++--------------+---------------+-----------+----------+------------------------------------------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+ Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.
+
+* Inferred Burst Summary
++--------------+-----------+--------+-------+-------+-----------------------------------+
+| HW Interface | Direction | Length | Width | Loop  | Loop Location                     |
++--------------+-----------+--------+-------+-------+-----------------------------------+
+| m_axi_gmem   | read      | 128    | 64    | load  | hw/hls/ntt/ntt_forward.cpp:125:11 |
+| m_axi_gmem   | write     | 128    | 64    | store | hw/hls/ntt/ntt_forward.cpp:136:12 |
++--------------+-----------+--------+-------+-------+-----------------------------------+
+
+* All M_AXI Variable Accesses
++--------------+--------------+-----------------------------------+-----------+--------------+--------+-------+-----------------------------------+------------+-------------------------------------------------------------------------------------------------------+
+| HW Interface | Variable     | Access Location                   | Direction | Burst Status | Length | Loop  | Loop Location                     | Resolution | Problem                                                                                               |
++--------------+--------------+-----------------------------------+-----------+--------------+--------+-------+-----------------------------------+------------+-------------------------------------------------------------------------------------------------------+
+| m_axi_gmem   | coefficients | hw/hls/ntt/ntt_forward.cpp:127:31 | read      | Widen Fail   |        | load  | hw/hls/ntt/ntt_forward.cpp:125:11 | 214-353    | Could not widen since type i64 size is greater than or equal to the max_widen_bitwidth threshold of 0 |
+| m_axi_gmem   | coefficients | hw/hls/ntt/ntt_forward.cpp:127:31 | read      | Inferred     | 128    | load  | hw/hls/ntt/ntt_forward.cpp:125:11 |            |                                                                                                       |
+| m_axi_gmem   | coefficients | hw/hls/ntt/ntt_forward.cpp:145:25 | write     | Widen Fail   |        | store | hw/hls/ntt/ntt_forward.cpp:136:12 | 214-353    | Could not widen since type i64 size is greater than or equal to the max_widen_bitwidth threshold of 0 |
+| m_axi_gmem   | coefficients | hw/hls/ntt/ntt_forward.cpp:145:25 | write     | Inferred     | 128    | store | hw/hls/ntt/ntt_forward.cpp:136:12 |            |                                                                                                       |
++--------------+--------------+-----------------------------------+-----------+--------------+--------+-------+-----------------------------------+------------+-------------------------------------------------------------------------------------------------------+
+
+    * Resolution URL: docs.amd.com/access/sources/dita/topic?Doc_Version=2026.1%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
+
+================================================================
+== Bind Op Report
+================================================================
++-------------------------------------+-----+--------+----------------+-----------+--------------------------+---------+
+| Name                                | DSP | Pragma | Variable       | Op        | Impl                     | Latency |
++-------------------------------------+-----+--------+----------------+-----------+--------------------------+---------+
+| + ntt_transform                     | 66  |        |                |           |                          |         |
+|   icmp_ln131_fu_276_p2              |     |        | icmp_ln131     | setgt     | auto                     | 0       |
+|   xor_ln133_fu_286_p2               |     |        | xor_ln133      | xor       | auto                     | 0       |
+|   select_ln133_fu_292_p3            |     |        | select_ln133   | select    | auto_sel                 | 0       |
+|   sub_ln134_fu_311_p2               |     |        | sub_ln134      | sub       | fabric                   | 0       |
+|   add_ln134_fu_316_p2               |     |        | add_ln134      | add       | fabric                   | 0       |
+|   select_ln134_fu_321_p3            |     |        | select_ln134   | select    | auto_sel                 | 0       |
+|   shift_3_fu_300_p2                 |     |        | shift_3        | add       | fabric                   | 0       |
+|  + ntt_transform_Pipeline_load      | 0   |        |                |           |                          |         |
+|    icmp_ln125_fu_215_p2             |     |        | icmp_ln125     | seteq     | auto                     | 0       |
+|    add_ln125_fu_221_p2              |     |        | add_ln125      | add       | fabric                   | 0       |
+|  + transform_stage                  | 56  |        |                |           |                          |         |
+|    distance_fu_188_p2               |     |        | distance       | shl       | auto_pipe                | 0       |
+|    icmp_ln68_fu_208_p2              |     |        | icmp_ln68      | setne     | auto                     | 0       |
+|    row_distance_fu_213_p3           |     |        | row_distance   | select    | auto_sel                 | 0       |
+|    row_mask_fu_226_p2               |     |        | row_mask       | add       | fabric                   | 0       |
+|    stride_fu_233_p3                 |     |        | stride         | select    | auto_sel                 | 0       |
+|    mask_fu_256_p2                   |     |        | mask           | add       | fabric                   | 0       |
+|    sub_ln98_fu_271_p2               |     |        | sub_ln98       | sub       | fabric                   | 0       |
+|    or_ln98_fu_319_p2                |     |        | or_ln98        | or        | auto                     | 0       |
+|    or_ln98_1_fu_428_p2              |     |        | or_ln98_1      | or        | auto                     | 0       |
+|    or_ln98_2_fu_454_p2              |     |        | or_ln98_2      | or        | auto                     | 0       |
+|    or_ln98_3_fu_581_p2              |     |        | or_ln98_3      | or        | auto                     | 0       |
+|    or_ln98_4_fu_599_p2              |     |        | or_ln98_4      | or        | auto                     | 0       |
+|    or_ln98_5_fu_617_p2              |     |        | or_ln98_5      | or        | auto                     | 0       |
+|    or_ln98_6_fu_635_p2              |     |        | or_ln98_6      | or        | auto                     | 0       |
+|   + transform_stage_Pipeline_groups | 56  |        |                |           |                          |         |
+|     icmp_ln100_fu_1105_p2           |     |        | icmp_ln100     | seteq     | auto                     | 0       |
+|     icmp_ln100_2_fu_1111_p2         |     |        | icmp_ln100_2   | seteq     | auto                     | 0       |
+|     icmp_ln100_4_fu_1117_p2         |     |        | icmp_ln100_4   | seteq     | auto                     | 0       |
+|     icmp_ln100_6_fu_1123_p2         |     |        | icmp_ln100_6   | seteq     | auto                     | 0       |
+|     icmp_ln100_8_fu_1129_p2         |     |        | icmp_ln100_8   | seteq     | auto                     | 0       |
+|     icmp_ln100_7_fu_1135_p2         |     |        | icmp_ln100_7   | seteq     | auto                     | 0       |
+|     icmp_ln100_5_fu_1141_p2         |     |        | icmp_ln100_5   | seteq     | auto                     | 0       |
+|     icmp_ln100_9_fu_1147_p2         |     |        | icmp_ln100_9   | seteq     | auto                     | 0       |
+|     icmp_ln100_3_fu_1153_p2         |     |        | icmp_ln100_3   | seteq     | auto                     | 0       |
+|     icmp_ln100_1_fu_1159_p2         |     |        | icmp_ln100_1   | seteq     | auto                     | 0       |
+|     icmp_ln73_fu_1173_p2            |     |        | icmp_ln73      | seteq     | auto                     | 0       |
+|     group_2_fu_1179_p2              |     |        | group_2        | add       | fabric                   | 0       |
+|     sub_ln75_fu_1189_p2             |     |        | sub_ln75       | sub       | fabric                   | 0       |
+|     and_ln75_fu_1195_p2             |     |        | and_ln75       | and       | auto                     | 0       |
+|     and_ln75_1_fu_1207_p2           |     |        | and_ln75_1     | and       | auto                     | 0       |
+|     or_ln75_fu_1213_p2              |     |        | or_ln75        | or        | auto                     | 0       |
+|     row_hi_fu_1235_p2               |     |        | row_hi         | add       | fabric                   | 0       |
+|     select_ln100_fu_1335_p3         |     |        | select_ln100   | select    | auto_sel                 | 0       |
+|     sparsemux_9_2_32_1_1_U215       |     |        | tmp_2          | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_9_2_32_1_1_U216       |     |        | tmp_3          | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_2_fu_1389_p3             |     |        | cond64_2       | select    | auto_sel                 | 0       |
+|     sparsemux_9_2_32_1_1_U217       |     |        | tmp_4          | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_9_2_32_1_1_U218       |     |        | tmp_5          | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_3_fu_1443_p3             |     |        | cond64_3       | select    | auto_sel                 | 0       |
+|     sparsemux_9_3_32_1_1_U219       |     |        | tmp_6          | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_9_3_32_1_1_U220       |     |        | tmp_7          | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_4_fu_1497_p3             |     |        | cond64_4       | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U221      |     |        | tmp_8          | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U222      |     |        | tmp_9          | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_5_fu_1583_p3             |     |        | cond64_5       | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U223      |     |        | tmp_s          | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U224      |     |        | tmp_1          | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_6_fu_1669_p3             |     |        | cond64_6       | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U225      |     |        | tmp_10         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U226      |     |        | tmp_11         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_7_fu_1755_p3             |     |        | cond64_7       | select    | auto_sel                 | 0       |
+|     icmp_ln100_10_fu_1763_p2        |     |        | icmp_ln100_10  | setne     | auto                     | 0       |
+|     select_ln100_1_fu_1768_p3       |     |        | select_ln100_1 | select    | auto_sel                 | 0       |
+|     select_ln100_2_fu_1776_p3       |     |        | select_ln100_2 | select    | auto_sel                 | 0       |
+|     cond64_8_fu_1784_p3             |     |        | cond64_8       | select    | auto_sel                 | 0       |
+|     sparsemux_9_3_32_1_1_U227       |     |        | tmp_12         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_9_3_32_1_1_U228       |     |        | tmp_13         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_9_fu_1837_p3             |     |        | cond64_9       | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U229      |     |        | tmp_14         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U230      |     |        | tmp_15         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_10_fu_1922_p3            |     |        | cond64_10      | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U231      |     |        | tmp_16         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U232      |     |        | tmp_17         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_11_fu_2007_p3            |     |        | cond64_11      | select    | auto_sel                 | 0       |
+|     sparsemux_9_3_32_1_1_U233       |     |        | tmp_18         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_9_3_32_1_1_U234       |     |        | tmp_19         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_12_fu_2060_p3            |     |        | cond64_12      | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U235      |     |        | tmp_20         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U236      |     |        | tmp_21         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_13_fu_2145_p3            |     |        | cond64_13      | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U237      |     |        | tmp_22         | sparsemux | compactencoding_dontcare | 0       |
+|     sparsemux_17_3_32_1_1_U238      |     |        | tmp_23         | sparsemux | compactencoding_dontcare | 0       |
+|     cond64_14_fu_2230_p3            |     |        | cond64_14      | select    | auto_sel                 | 0       |
+|     sparsemux_17_3_32_1_1_U239      |     |        | tmp_24         | sparsemux | compactencoding_dontcare | 0       |
+|    + butterfly_0u_s                 | 7   |        |                |           |                          |         |
+|      xor_ln54_fu_205_p2             |     |        | xor_ln54       | xor       | auto                     | 0       |
+|      select_ln54_fu_211_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_223_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_229_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_234_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      sparsemux_17_4_32_1_1_U14      |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_289_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_293_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U11         | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U12        | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U13         | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_319_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_338_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_344_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_349_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_354_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_1u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_239_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_245_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_257_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_263_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_268_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      xor_ln56_fu_278_p2             |     |        | xor_ln56       | xor       | auto                     | 0       |
+|      icmp_ln57_fu_296_p2            |     |        | icmp_ln57      | seteq     | auto                     | 0       |
+|      a_fu_302_p3                    |     |        | a              | select    | auto_sel                 | 0       |
+|      b_fu_316_p20                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_19_4_32_1_1_U36      |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_365_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_369_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U33         | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U34        | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U35         | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_395_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_414_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_420_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_425_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_430_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_2u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_301_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_307_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_319_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_329_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_334_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      xor_ln56_fu_352_p2             |     |        | xor_ln56       | xor       | auto                     | 0       |
+|      sparsemux_9_3_32_1_1_U56       |     |        | a              | sparsemux | compactencoding_dontcare | 0       |
+|      b_fu_402_p30                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_29_4_32_1_1_U57      |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_471_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_475_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U53         | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U54        | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U55         | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_501_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_520_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_526_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_531_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_536_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_3u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_321_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_327_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_339_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_349_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_354_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      xor_ln56_fu_372_p2             |     |        | xor_ln56       | xor       | auto                     | 0       |
+|      xor_ln56_4_fu_386_p2           |     |        | xor_ln56_4     | xor       | auto                     | 0       |
+|      or_ln56_fu_400_p2              |     |        | or_ln56        | or        | auto                     | 0       |
+|      sparsemux_17_3_32_1_1_U83      |     |        | a              | sparsemux | compactencoding_dontcare | 0       |
+|      b_fu_472_p32                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_31_4_32_1_1_U84      |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_545_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_549_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U80         | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U81        | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U82         | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_575_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_594_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_600_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_605_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_610_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_4u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_305_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_311_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_323_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_329_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_334_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      xor_ln56_fu_352_p2             |     |        | xor_ln56       | xor       | auto                     | 0       |
+|      sparsemux_9_4_32_1_1_U111      |     |        | a              | sparsemux | compactencoding_dontcare | 0       |
+|      b_fu_398_p32                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_31_4_32_1_1_U112     |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_471_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_475_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U108        | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U109       | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U110        | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_501_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_520_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_526_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_531_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_536_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_5u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_301_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_307_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_319_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_325_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_330_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      lo_fu_364_p2                   |     |        | lo             | xor       | auto                     | 0       |
+|      sparsemux_33_4_32_1_1_U138     |     |        | a              | sparsemux | compactencoding_dontcare | 0       |
+|      b_fu_448_p32                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_31_4_32_1_1_U139     |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_521_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_525_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U135        | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U136       | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U137        | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_551_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_570_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_576_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_581_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_586_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_6u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_321_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_327_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_339_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_345_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_350_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      xor_ln56_fu_386_p2             |     |        | xor_ln56       | xor       | auto                     | 0       |
+|      xor_ln56_3_fu_400_p2           |     |        | xor_ln56_3     | xor       | auto                     | 0       |
+|      or_ln56_fu_414_p2              |     |        | or_ln56        | or        | auto                     | 0       |
+|      sparsemux_17_4_32_1_1_x_U165   |     |        | a              | sparsemux | compactencoding_dontcare | 0       |
+|      b_fu_482_p32                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_31_4_32_1_1_U166     |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_555_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_559_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U162        | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U163       | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U164        | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_585_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_604_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_610_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_615_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_620_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|    + butterfly_7u_s                 | 7   |        |                |           |                          |         |
+|      sub_ln54_fu_311_p2             |     |        | sub_ln54       | sub       | fabric                   | 0       |
+|      select_ln54_fu_317_p3          |     |        | select_ln54    | select    | auto_sel                 | 0       |
+|      segment_fu_329_p2              |     |        | segment        | lshr      | auto_pipe                | 0       |
+|      lshr_ln55_fu_335_p2            |     |        | lshr_ln55      | lshr      | auto_pipe                | 0       |
+|      add_ln55_fu_340_p2             |     |        | add_ln55       | add       | fabric                   | 0       |
+|      xor_ln56_fu_364_p2             |     |        | xor_ln56       | xor       | auto                     | 0       |
+|      xor_ln56_1_fu_370_p2           |     |        | xor_ln56_1     | xor       | auto                     | 0       |
+|      or_ln56_fu_376_p2              |     |        | or_ln56        | or        | auto                     | 0       |
+|      sparsemux_33_4_32_1_1_U192     |     |        | a              | sparsemux | compactencoding_dontcare | 0       |
+|      b_fu_476_p32                   |     |        | add_ln57       | add       | fabric                   | 0       |
+|      sparsemux_31_4_32_1_1_U193     |     |        | b              | sparsemux | compactencoding_dontcare | 0       |
+|      sub_ln59_fu_549_p2             |     |        | sub_ln59       | sub       | fabric                   | 0       |
+|      select_ln59_fu_553_p3          |     |        | select_ln59    | select    | auto_sel                 | 0       |
+|      mul_32s_23s_54_1_1_U189        | 2   |        | mul_ln59       | mul       | auto                     | 0       |
+|      mul_32s_27ns_32_1_1_U190       | 3   |        | m              | mul       | auto                     | 0       |
+|      mul_32s_24s_55_1_1_U191        | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|      add_ln43_fu_579_p2             |     |        | add_ln43       | add       | fabric                   | 0       |
+|      select_ln60_fu_598_p3          |     |        | select_ln60    | select    | auto_sel                 | 0       |
+|      add_ln60_fu_604_p2             |     |        | add_ln60       | add       | fabric                   | 0       |
+|      sub_ln61_fu_609_p2             |     |        | sub_ln61       | sub       | fabric                   | 0       |
+|      select_ln61_fu_614_p3          |     |        | select_ln61    | select    | auto_sel                 | 0       |
+|  + ntt_transform_Pipeline_store     | 10  |        |                |           |                          |         |
+|    icmp_ln136_fu_282_p2             |     |        | icmp_ln136     | seteq     | auto                     | 0       |
+|    add_ln136_fu_288_p2              |     |        | add_ln136      | add       | fabric                   | 0       |
+|    sparsemux_9_2_32_1_1_U314        |     |        | lo             | sparsemux | compactencoding_dontcare | 0       |
+|    sparsemux_9_2_32_1_1_U315        |     |        | hi             | sparsemux | compactencoding_dontcare | 0       |
+|    mul_32s_27ns_32_1_1_U310         | 3   |        | m              | mul       | auto                     | 0       |
+|    mul_32s_24s_55_1_1_U312          | 2   |        | mul_ln43       | mul       | auto                     | 0       |
+|    add_ln43_fu_554_p2               |     |        | add_ln43       | add       | fabric                   | 0       |
+|    mul_32s_27ns_32_1_1_U311         | 3   |        | m_1            | mul       | auto                     | 0       |
+|    mul_32s_24s_55_1_1_U313          | 2   |        | mul_ln43_1     | mul       | auto                     | 0       |
+|    add_ln43_1_fu_585_p2             |     |        | add_ln43_1     | add       | fabric                   | 0       |
+|    lo_2_fu_605_p3                   |     |        | lo_2           | select    | auto_sel                 | 0       |
+|    hi_2_fu_611_p3                   |     |        | hi_2           | select    | auto_sel                 | 0       |
++-------------------------------------+-----+--------+----------------+-----------+--------------------------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++-------------------------------------+--------------+-----------+------+------+--------+--------+-----------+------+---------+------------------+
+| Name                                | Usage        | Type      | BRAM | URAM | CE_REG | Pragma | Variable  | Impl | Latency | Bitwidth, Depth, |
+|                                     |              |           |      |      |        |        |           |      |         | Banks            |
++-------------------------------------+--------------+-----------+------+------+--------+--------+-----------+------+---------+------------------+
+| + ntt_transform                     |              |           | 44   | 0    |        |        |           |      |         |                  |
+|   control_s_axi_U                   | interface    | s_axilite |      |      |        |        |           |      |         |                  |
+|   gmem_m_axi_U                      | interface    | m_axi     | 4    |      |        |        |           |      |         |                  |
+|   local_U                           | ram_2p array |           | 2    |      | N      |        | local     | auto | 1       | 32, 32, 1        |
+|   local_1_U                         | ram_2p array |           | 2    |      | N      |        | local_1   | auto | 1       | 32, 32, 1        |
+|   local_2_U                         | ram_2p array |           | 2    |      | N      |        | local_2   | auto | 1       | 32, 32, 1        |
+|   local_3_U                         | ram_2p array |           | 2    |      | N      |        | local_3   | auto | 1       | 32, 32, 1        |
+|   local_4_U                         | ram_2p array |           | 2    |      | N      |        | local_4   | auto | 1       | 32, 32, 1        |
+|   local_5_U                         | ram_2p array |           | 2    |      | N      |        | local_5   | auto | 1       | 32, 32, 1        |
+|   local_6_U                         | ram_2p array |           | 2    |      | N      |        | local_6   | auto | 1       | 32, 32, 1        |
+|   local_7_U                         | ram_2p array |           | 2    |      | N      |        | local_7   | auto | 1       | 32, 32, 1        |
+|   scratch_U                         | ram_2p array |           | 2    |      | N      |        | scratch   | auto | 1       | 32, 32, 1        |
+|   scratch_1_U                       | ram_2p array |           | 2    |      | N      |        | scratch_1 | auto | 1       | 32, 32, 1        |
+|   scratch_2_U                       | ram_2p array |           | 2    |      | N      |        | scratch_2 | auto | 1       | 32, 32, 1        |
+|   scratch_3_U                       | ram_2p array |           | 2    |      | N      |        | scratch_3 | auto | 1       | 32, 32, 1        |
+|   scratch_4_U                       | ram_2p array |           | 2    |      | N      |        | scratch_4 | auto | 1       | 32, 32, 1        |
+|   scratch_5_U                       | ram_2p array |           | 2    |      | N      |        | scratch_5 | auto | 1       | 32, 32, 1        |
+|   scratch_6_U                       | ram_2p array |           | 2    |      | N      |        | scratch_6 | auto | 1       | 32, 32, 1        |
+|   scratch_7_U                       | ram_2p array |           | 2    |      | N      |        | scratch_7 | auto | 1       | 32, 32, 1        |
+|  + transform_stage                  |              |           | 8    | 0    |        |        |           |      |         |                  |
+|   + transform_stage_Pipeline_groups |              |           | 8    | 0    |        |        |           |      |         |                  |
+|    + butterfly_0u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_1u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_2u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_3u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_4u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_5u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_6u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
+|    + butterfly_7u_s                 |              |           | 1    | 0    |        |        |           |      |         |                  |
+|      zetas_U                        | rom_1p       |           | 1    |      | N      |        | zetas     | auto | 1       | 23, 256, 1       |
++-------------------------------------+--------------+-----------+------+------+--------+--------+-----------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Ignored Pragmas
++-----------------+--------------------------------------------+--------------------------------------------------------------------+--------------------------------------------------------------------------+
+| Type            | Options                                    | Location                                                           | Messages                                                                 |
++-----------------+--------------------------------------------+--------------------------------------------------------------------+--------------------------------------------------------------------------+
+| INLINE          |                                            | in montgomery_reduce_product (../../hw/hls/ntt/ntt_forward.cpp:41) | Not implemented                                                          |
+| INLINE          | off                                        | in butterfly (../../hw/hls/ntt/ntt_forward.cpp:50)                 | Not implemented                                                          |
+| ARRAY_PARTITION | variable=values complete                   | in butterfly (../../hw/hls/ntt/ntt_forward.cpp:52)                 | Not implemented                                                          |
+| INLINE          | off                                        | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:66)           | Not implemented                                                          |
+| ARRAY_PARTITION | variable=values complete                   | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:78)           | Not implemented                                                          |
+| ARRAY_PARTITION | variable=sums complete                     | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:79)           | Not implemented                                                          |
+| ARRAY_PARTITION | variable=differences complete              | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:80)           | Not implemented                                                          |
+| UNROLL          |                                            | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:82)           | Not implemented                                                          |
+| UNROLL          |                                            | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:96)           | Not implemented                                                          |
+| ARRAY_PARTITION | variable=local complete dim=2              | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:122)            | Not implemented                                                          |
+| ARRAY_PARTITION | variable=scratch complete dim=2            | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:123)            | Not implemented                                                          |
+| ALLOCATION      | instances=transform_stage limit=1 function | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:124)            | unexpected pragma argument 'transform_stage', expects function/operation |
++-----------------+--------------------------------------------+--------------------------------------------------------------------+--------------------------------------------------------------------------+
+
+* Implemented Pragmas
++-----------------+------------------------------------------+--------------------------------------------------------------------+
+| Type            | Options                                  | Location                                                           |
++-----------------+------------------------------------------+--------------------------------------------------------------------+
+| INLINE          |                                          | in _zl25montgomery_reduce_productl (hw/hls/ntt/ntt_forward.cpp:41) |
+| INLINE          | off                                      | in butterfly<7u> (hw/hls/ntt/ntt_forward.cpp:50)                   |
+| INLINE          | off                                      | in transform_stage (hw/hls/ntt/ntt_forward.cpp:66)                 |
+| ARRAY_PARTITION | dim=1 type=complete variable=values      | in transform_stage (hw/hls/ntt/ntt_forward.cpp:78)                 |
+| ARRAY_PARTITION | dim=1 type=complete variable=sums        | in transform_stage (hw/hls/ntt/ntt_forward.cpp:79)                 |
+| ARRAY_PARTITION | dim=1 type=complete variable=differences | in transform_stage (hw/hls/ntt/ntt_forward.cpp:80)                 |
+| ARRAY_PARTITION | dim=2 type=complete variable=local       | in ntt_transform (hw/hls/ntt/ntt_forward.cpp:122)                  |
+| ARRAY_PARTITION | dim=2 type=complete variable=scratch     | in ntt_transform (hw/hls/ntt/ntt_forward.cpp:123)                  |
++-----------------+------------------------------------------+--------------------------------------------------------------------+
+
+* Valid Pragma Syntax
++-----------+-----------------------------------------------------------------+----------------------------------------------------------+
+| Type      | Options                                                         | Location                                                 |
++-----------+-----------------------------------------------------------------+----------------------------------------------------------+
+| PIPELINE  | ii=2                                                            | in butterfly (../../hw/hls/ntt/ntt_forward.cpp:51)       |
+| PIPELINE  | ii=2                                                            | in transform_stage (../../hw/hls/ntt/ntt_forward.cpp:74) |
+| INTERFACE | mode=s_axilite port=inverse                                     | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:114)  |
+| INTERFACE | mode=m_axi port=coefficients offset=slave bundle=gmem depth=128 | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:118)  |
+| INTERFACE | mode=s_axilite port=return                                      | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:119)  |
+| PIPELINE  | ii=1                                                            | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:126)  |
+| PIPELINE  | off                                                             | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:132)  |
+| PIPELINE  | ii=1                                                            | in ntt_transform (../../hw/hls/ntt/ntt_forward.cpp:137)  |
++-----------+-----------------------------------------------------------------+----------------------------------------------------------+
+
+

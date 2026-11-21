@@ -1,0 +1,28 @@
+--- fips202.c
++++ fips202.c
+@@ -81,6 +81,12 @@
+ **************************************************/
+ static void KeccakF1600_StatePermute(uint64_t state[25])
+ {
++#if MLDSA_BACKEND != 0
++  if (benchmark_use_fpga) {
++    hw_permute(state);
++    return;
++  }
++#endif
+         int round;
+ 
+         uint64_t Aba, Abe, Abi, Abo, Abu;
+@@ -504,6 +510,12 @@
+ {
+   unsigned int i;
+ 
++#if MLDSA_BACKEND == 3
++  if (benchmark_use_fpga) {
++    hw_squeeze(out, nblocks, s, r);
++    return;
++  }
++#endif
+   while(nblocks) {
+     KeccakF1600_StatePermute(s);
+     for(i=0;i<r/8;i++)

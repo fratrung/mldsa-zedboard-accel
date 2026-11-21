@@ -1,0 +1,105 @@
+
+=== Keccak-f[1600] accelerator test (print 73) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 74) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 75) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 76) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 77) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 78) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 79) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 80) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 81) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 82) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 83) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 84) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 85) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 86) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test (print 87) ===
+accelerator at 0x40000000
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 38280 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)

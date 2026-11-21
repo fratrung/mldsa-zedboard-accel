@@ -1,0 +1,6 @@
+[submodule "third_party/dilithium"]
+	path = third_party/dilithium
+	url = https://github.com/pq-crystals/dilithium.git
+[submodule "hw/vivado/boards/digilent"]
+	path = hw/vivado/boards/digilent
+	url = https://github.com/Digilent/vivado-boards.git

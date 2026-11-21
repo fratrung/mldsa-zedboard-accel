@@ -1,0 +1,28 @@
+--- ntt.c
++++ ntt.c
+@@ -50,6 +50,11 @@
+   unsigned int len, start, j, k;
+   int32_t zeta, t;
+ 
++  if (benchmark_use_ntt) {
++    hw_ntt(a);
++    return;
++  }
++
+   k = 0;
+   for(len = 128; len > 0; len >>= 1) {
+     for(start = 0; start < N; start = j + len) {
+@@ -79,6 +84,13 @@
+   int32_t t, zeta;
+   const int32_t f = 41978; // mont^2/256
+ 
++#ifdef NTT_BIDIRECTIONAL
++  if (benchmark_use_invntt) {
++    hw_invntt(a);
++    return;
++  }
++#endif
++
+   k = 256;
+   for(len = 1; len < N; len <<= 1) {
+     for(start = 0; start < N; start = j + len) {

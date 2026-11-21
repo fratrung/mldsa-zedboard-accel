@@ -1,0 +1,5 @@
+ML-DSA mode 2, backend 3, 1000 messages: PASS (code 0)
+SHAKE128 5 blocks (ns/call, 1000 calls): SW 86158, selected 18124
+SW mean sign 8898 us, verify 2695 us
+selected mean sign 6274 us, verify 1399 us
+END

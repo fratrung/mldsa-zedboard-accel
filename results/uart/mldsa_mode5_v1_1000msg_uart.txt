@@ -1,0 +1,6 @@
+5 blocks (ns/call, 1000 calls): SW 86003, selected 193410
+SW meML-DSA mode 5, backend 1, 1000 messages: PASS (code 0)
+SHAKE128 5 blocks (ns/call, 1000 calls): SW 86146, selected 193560
+SW mean sign 18250 us, verify 7535 us
+selected mean sign 28003 us, verify 14217 us
+END

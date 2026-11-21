@@ -1,0 +1,107 @@
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 60) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+=== Keccak-f[1600] accelerator test, m_axi version (print 63) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 64) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 65) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 66) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 67) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 68) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 69) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 70) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 71) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 72) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 73) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 74) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 75) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 76) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)
+
+=== Keccak-f[1600] accelerator test, m_axi version (print 77) ===
+accelerator at 0x40000000, state buffer in DDR at 0x0010C1C0
+PASS: 1001 states, all equal to the original
+hardware (transfers included): 4947 ns per permutation
+software (reference code):     16806 ns per permutation
+(lane 0 after the timing loops: 2C9128A9F8FE5479)

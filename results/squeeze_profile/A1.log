@@ -1,0 +1,22 @@
+attempting to launch hw_server
+
+****** Xilinx hw_server v2026.1
+  **** Build date : May 29 2026 at 20:56:35
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: hw_server application started
+INFO: Use Ctrl-C to exit hw_server application
+
+INFO: To connect to this hw_server instance use url: TCP:127.0.0.1:3121
+
+bitstream build/mldsa/program-v3/keccak_multiblock.bit
+ELF 9fb2265de703914e89092208172b306b50bc87004481c7eb805a02492a21c93d  build/mldsa/squeeze-profile/mldsa.elf
+software_ns 86080
+batch total_ns state_copy_flush_ns command_rate_ns out_flush_ns nblocks_ns start_done_ns invalidate_copy_ns
+1 18204 953 778 1634 425 10726 3886
+2 18115 953 779 1633 425 10726 3886
+3 18120 953 780 1633 426 10726 3884
+4 18081 953 780 1633 426 10726 3883
+5 18117 953 779 1633 425 10726 3885
+PASS
