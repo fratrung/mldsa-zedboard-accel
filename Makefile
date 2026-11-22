@@ -10,7 +10,11 @@
 #   make uart MODE=2          read the result from the USB-UART (cable on J14)
 #
 # Other systems: make bitstream VARIANT=v3 (see hw/vivado/build_system.tcl).
-# Prebuilt files: make program XSA=dist/<file>.xsa ELF=dist/<file>.elf
+#
+# Prebuilt systems (prebuilt/<VARIANT>/, no build needed, only xsdb and pyserial):
+#   make check-prebuilt                         verify the SHA-256 sums
+#   make program-prebuilt VARIANT=v2 MODE=3     load one prebuilt system + ELF
+#   make measure-all                            every system and level, logs in build/campaign
 
 MODE    ?= 2
 MODES   ?= 2 3 5
@@ -20,7 +24,8 @@ ELF     ?= build/mldsa/board/mode$(MODE)/v3-ntt64bi/mldsa.elf
 PROGRAM := build/program/$(notdir $(basename $(XSA)))
 PYTHON  ?= python3
 
-.PHONY: all host host-all hls hls-keccak hls-ntt hls-v1 hls-v2 hls-ntt32 hls-ntt64 verify-keccak bitstream platform elf program uart clean
+.PHONY: all host host-all hls hls-keccak hls-ntt hls-v1 hls-v2 hls-ntt32 hls-ntt64 verify-keccak bitstream platform elf program uart \
+        check-prebuilt program-prebuilt measure-all clean
 
 all: hls bitstream platform elf
 
@@ -76,6 +81,19 @@ program:
 	unzip -p $(XSA) '*.bit' > $(PROGRAM)/system.bit
 	unzip -o -q $(XSA) ps7_init.tcl -d $(PROGRAM)
 	xsdb sw/run_on_board.tcl $(ELF) $(PROGRAM)/system.bit $(PROGRAM)/ps7_init.tcl
+
+PREBUILT_XSA = $(wildcard prebuilt/$(VARIANT)/*.xsa)
+PREBUILT_ELF = $(wildcard prebuilt/$(VARIANT)/mldsa_mode$(MODE)_*.elf)
+
+check-prebuilt:
+	cd prebuilt && sha256sum -c SHA256SUMS
+
+program-prebuilt:
+	@test -n "$(PREBUILT_XSA)" -a -n "$(PREBUILT_ELF)" || { echo "No prebuilt XSA/ELF for VARIANT=$(VARIANT) MODE=$(MODE)"; exit 1; }
+	$(MAKE) program XSA=$(PREBUILT_XSA) ELF=$(PREBUILT_ELF)
+
+measure-all:
+	$(PYTHON) scripts/measure_all.py
 
 uart:
 	mkdir -p build/logs

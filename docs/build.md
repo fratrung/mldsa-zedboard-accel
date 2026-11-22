@@ -73,7 +73,9 @@ The script ([`build_system.tcl`](../hw/vivado/build_system.tcl)):
    slack, writes utilization reports in the `impl_1` run directory and exports
    the XSA with the bitstream.
 
-A run takes 10–25 minutes and about 4 GB of RAM.
+A run takes 10–20 minutes. `launch_runs -jobs 4` synthesises four IPs out of
+context in parallel, so a run peaks at about 10 GB of RAM: on a 16 GB machine
+build the systems one at a time.
 
 ## 3. Vitis platform (BSP)
 
@@ -118,6 +120,11 @@ python3 sw/mldsa/build.py board v3 --squeeze-profile  # build/mldsa/squeeze-prof
 
 Set the boot jumpers JP7–JP11 to GND (JTAG boot), power the board and connect
 the micro-USB cable to **PROG (J17)**.
+
+The files in [`prebuilt/`](../prebuilt) can be loaded without building
+anything: `make program-prebuilt VARIANT=<folder> MODE=<N>`, or
+`make measure-all` for every system and level (see
+[prebuilt/README.md](../prebuilt/README.md)). For files built locally:
 
 ```sh
 make program MODE=2                       # final system, ML-DSA-44
@@ -164,11 +171,15 @@ xsdb sw/keccak_test/squeeze_profile/read_jtag.tcl build/mldsa/squeeze-profile/ml
   run without errors. The three rebuilt ELFs load exactly the same code and
   data as the measured ones; the only difference is the 20-byte GNU build ID,
   a hash that also covers the debug information and therefore the build path.
-- **Vivado:** the measured systems `v3`, `ntt`, `ntt64`, `ntt64bi` and `final`
-  were built by the same flow that `build_system.tcl` contains (same block
-  design script, connections, strategy and checks). The v1 and v2 systems were
-  originally created in the Vivado IDE; the v1/v2 branches of
-  `build_system.tcl` have not yet been run end to end.
+- **Vivado:** all seven systems were rebuilt from an empty `build/` with
+  `build_system.tcl`. Timing and utilization are identical to the reports of
+  the measured systems in [results/implementation](../results/implementation)
+  (v1: to the figures in [benchmark.md](benchmark.md)), and the final
+  bitstream has the same configuration data as the measured one; only the
+  date in the `.bit` header differs. The v1 and v2 systems were originally
+  created in the Vivado IDE; the scripted branches give the same
+  implementation results.
 - **Board:** the measurements in [results/](../results) come from the
-  bitstreams and ELFs built during the project; the final XSA and ELFs are
-  published as release files with their SHA-256 sums.
+  bitstreams and ELFs built during the project. [`prebuilt/`](../prebuilt)
+  contains the measured final XSA and ELFs and the rebuilt files of the other
+  systems, with their SHA-256 sums.

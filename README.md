@@ -82,7 +82,8 @@ sw/mldsa/           ML-DSA benchmark, accelerator driver, patches for fips202.c 
 sw/keccak_test/     single-permutation test of v1/v2, SHAKE squeeze profiling (read over JTAG)
 sw/platform/        Vitis platform (BSP) script and linker script
 sw/run_on_board.tcl JTAG loader (bitstream + PS init + ELF)
-scripts/            tool environment, USB-UART reader
+scripts/            tool environment, USB-UART reader, measurement campaign
+prebuilt/           XSA and ELFs of every system, ready to load (see its README)
 results/            UART logs of every measurement, HLS and Vivado reports
 third_party/        pq-crystals/dilithium (submodule, commit d35ba3fe54, unmodified)
 ```
@@ -121,23 +122,28 @@ make host-all      # every backend (sw, v1, v2, v3, NTT variants)
 
 Each run ends with `ML-DSA mode N, backend 3, 1000 messages: PASS (code 0)`.
 
-### 2. Run the prebuilt release on the board
+### 2. Run the prebuilt systems on the board
 
-The release contains the final XSA (bitstream + PS initialisation) and the three
-ELFs (one per security level). Only `xsdb` (part of Vivado/Vitis or Vivado Lab
-Edition) and `pyserial` are needed. Download the release files into `dist/`:
+[`prebuilt/`](prebuilt) contains the XSA (bitstream + PS initialisation) and
+the ELFs of every system in the tables, so nothing has to be built. Only
+`xsdb` (part of Vivado/Vitis or the free Vivado Lab Edition) and `pyserial`
+are needed:
 
 ```sh
 source scripts/env.sh        # after: export XILINX_ROOT=/path/to/Xilinx/2026.1
-(cd dist && sha256sum -c SHA256SUMS)
+make check-prebuilt          # SHA-256 of every file
 # cable on PROG (J17), board on
-make program XSA=dist/keccak_multiblock_ntt8w64bi_hp2.xsa ELF=dist/mldsa_mode2_v3-ntt64bi.elf
+make program-prebuilt MODE=2 # final system, ML-DSA-44; VARIANT=v1|v2|v3|ntt|ntt64|ntt64bi for the others
 # move the cable to UART (J14); the summary arrives after about one minute
 make uart MODE=2
 ```
 
 The program prints its summary every two seconds, so the reader can be
-started after moving the cable. A run takes about one minute per level.
+started after moving the cable. Compare it with the log of the same system in
+[results/uart](results/uart). `make measure-all` runs every system and level
+(23 runs, about 40 minutes, unattended with two USB cables) and saves the logs
+in `build/campaign/`. Provenance of the files:
+[prebuilt/README.md](prebuilt/README.md).
 
 ### 3. Build everything from source
 
@@ -152,7 +158,9 @@ make program MODE=2 && make uart MODE=2
 ```
 
 The Vivado script writes the XSA only if setup and hold timing are met and if
-the NTT RTL inside Vivado is identical to the co-simulated one. Every other
+the NTT RTL inside Vivado is identical to the co-simulated one. With the same
+tool version, a clean build reproduces the measured final bitstream bit for
+bit (only the date in the `.bit` header changes). Every other
 system of the tables above (v1, v2, v3, 32/64-bit NTT, shared HP0) is built
 with the same scripts: see [docs/build.md](docs/build.md).
 
